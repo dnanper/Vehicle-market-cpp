@@ -6,7 +6,7 @@
 using namespace std;
 
 Customer::Customer(string name, int contact)
-    : name(name), contact(contact), vehicleCount(0), capacity(10) {
+    : name(name), contact(contact), vehicleCount(0), capacity(100) {
     vehicles = new Vehicle*[capacity];
     for (int i = 0; i < capacity; i++) {
         vehicles[i] = nullptr;
@@ -38,23 +38,6 @@ int Customer::getVehicleCount() const {
 }
 
 bool Customer::purchaseVehicle(Vehicle* vehicle) {
-    if (vehicleCount >= capacity) {
-        int newCapacity = capacity * 2;
-        Vehicle** newArray = new Vehicle*[newCapacity];
-        
-        for (int i = 0; i < capacity; i++) {
-            newArray[i] = vehicles[i];
-        }
-        
-        for (int i = capacity; i < newCapacity; i++) {
-            newArray[i] = nullptr;
-        }
-        
-        delete[] vehicles;
-        vehicles = newArray;
-        capacity = newCapacity;
-    }
-    
     vehicles[vehicleCount] = vehicle;
     vehicleCount++;
     cout << "Vehicle purchased successfully!" << endl;

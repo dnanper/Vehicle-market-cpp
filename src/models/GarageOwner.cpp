@@ -8,7 +8,7 @@
 using namespace std;
 
 GarageOwner::GarageOwner(string name)
-    : name(name), vehicleCount(0), capacity(20) {
+    : name(name), vehicleCount(0), capacity(1000) {
     inventory = new Vehicle*[capacity];
     for (int i = 0; i < capacity; i++) {
         inventory[i] = nullptr;
@@ -35,23 +35,6 @@ int GarageOwner::getVehicleCount() const {
 }
 
 bool GarageOwner::addVehicle(Vehicle* vehicle) {
-    if (vehicleCount >= capacity) {
-        int newCapacity = capacity * 2;
-        Vehicle** newArray = new Vehicle*[newCapacity];
-        
-        for (int i = 0; i < capacity; i++) {
-            newArray[i] = inventory[i];
-        }
-        
-        for (int i = capacity; i < newCapacity; i++) {
-            newArray[i] = nullptr;
-        }
-        
-        delete[] inventory;
-        inventory = newArray;
-        capacity = newCapacity;
-    }
-    
     inventory[vehicleCount] = vehicle;
     vehicleCount++;
     cout << "Vehicle added to inventory successfully!" << endl;
